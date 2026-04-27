@@ -18,21 +18,20 @@ export default function NavbarSecured({ theme, toggleTheme, isAuthenticated }) {
     {
       label: "Expertises",
       items: [
-        
-        { label: "Cabinet Juridique", href: "/testimonials", icon: <FaBalanceScale /> },
+         { label: "About", href: "/about", icon: < FaLightbulb/> },
+        // { label: "Cabinet Juridique", href: "/testimonials", icon: <FaBalanceScale /> },
         { label: "Coaching Business", href: "/skills", icon: <FaUserTie /> },
-        { label: "Conférences", href: "/work", icon: <FaMicrophoneAlt /> },
-         { label: "Ma vision", href: "/about", icon: < FaLightbulb/> },
-          { label: "Techniques", href: "/services", icon: <FaGavel /> },
-          { label: "Parcours", href: "/experience", icon: <FaHistory /> },
+        // { label: "Conférences", href: "/work", icon: <FaMicrophoneAlt /> },
+        { label: "Techniques", href: "/services", icon: <FaGavel /> },
+        { label: "Parcours", href: "/experience", icon: <FaHistory /> },
       ]
     },
     {
       label: "Impact & Publications",
       items: [
         { label: "Mon Accueil", href: "/", icon: <FaHome /> },
-        { label: "Mes Livres", href: "/projects", icon: <FaBookOpen /> },
-        { label: "Blog Impact", href: "/blog", icon: <FaFeather /> },
+        // { label: "Mes Livres", href: "/projects", icon: <FaBookOpen /> },
+        // { label: "Blog Impact", href: "/blog", icon: <FaFeather /> },
       ]
     }
   ];

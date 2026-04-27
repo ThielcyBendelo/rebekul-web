@@ -2,7 +2,7 @@ import { about } from '../assets/assets.js';
 import { profileImage as rebecca } from '../assets/assets.js';
 import { motion } from 'framer-motion';
 import LazyImage from './LazyImage';
-import PortfolioSection from "../components/PortfolioSection";
+// import PortfolioSection from "../components/PortfolioSection";
 import GoogleMapsSection from './GoogleMapsSection';
 
 export default function About() {
@@ -78,6 +78,13 @@ export default function About() {
                   </p>
                 </motion.div>
 
+                <motion.div variants={textVariants}>
+                  <h5 className="font-bold text-slate-900 uppercase tracking-widest text-xs mb-3">Certification</h5>
+                  <p className="text-sm text-slate-500 leading-relaxed">
+                    Titulaire d’une licence en droit privé et judiciaire obtenue à l’Université de Kinshasa(UNIKIN) en 2018.
+                  </p>
+                </motion.div>
+
                 <motion.div variants={textVariants} className="bg-amber-600 p-6 text-white self-center shadow-xl shadow-amber-900/20">
                   <p className="text-xs uppercase tracking-widest mb-2 font-bold">Besoin d'un accompagnement ?</p>
                   <a href="/contact" className="text-sm border-b border-white/50 hover:border-white transition-all pb-1 italic font-medium">
@@ -96,7 +103,7 @@ export default function About() {
           <h3 className="text-3xl font-serif italic text-slate-900">Le Cabinet & l'Espace Coaching</h3>
           <p className="text-amber-600 text-sm mt-2 font-bold tracking-widest uppercase">Kinshasa, République Démocratique du Congo</p>
         </div>
-        <PortfolioSection />
+        {/* <PortfolioSection /> */}
         <GoogleMapsSection />
       </section>
     </>

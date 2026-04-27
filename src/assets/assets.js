@@ -13,7 +13,7 @@ export const programmationImage = '/images/image.programmation2.jpg';
 export const logoImages = '/images/logorebkul.jpeg';
 
 export const about =
-  "Avocate dévouée à la justice et entrepreneure passionnée, j'œuvre pour la protection des droits et l'épanouissement du leadership féminin en Afrique. À travers mes ouvrages et mes séances de coaching, je m'engage à transmettre aux femmes et à la jeunesse les outils stratégiques et juridiques nécessaires pour bâtir des projets à fort impact et transformer durablement notre société.";
+  "Avocate au Barreau de Kinshasa/Gombe et experte en droit des affaires et du numérique.  ⁠Elle accompagne des entreprises nationales et internationales en conseil et en contentieux, principalement dans des secteurs hautement réglementés tels que les industries extractives, l’énergie et les télécommunications. ⁠Elle a contribué à l’élaboration du Plan national du numérique ainsi qu’au projet de loi portant Code du numérique en République Démocratique du Congo, participant activement à la structuration du cadre juridique du secteur digital. ⁠Ses domaines d’intervention couvrent notamment le droit du numérique, le droit minier, le droit des hydrocarbures, le droit fiscal, le droit du travail, le droit OHADA et le droit de l’environnement. ⁠Elle a renforcé son expertise à travers plusieurs formations spécialisées en droit de l’environnement, droit du numérique, droit OHADA ainsi qu’en matière de violences basées sur le genre, intégrant une approche juridique sensible aux enjeux contemporains de gouvernance et de responsabilité sociale.Cofondatrice d’une organisation engagée dans la protection de l’environnement, elle est également auteure de l’ouvrage « Mort numérique : esquisse d’une étude comparative de droit franco-congolais » (Éditions européennes, Paris, 2021). ⁠Elle travaille en français et en lingala, et dispose de connaissances de base en anglais (plus professionnel).";
 
 export const skills = [
   'Négociation',
@@ -41,7 +41,7 @@ export const skills = [
 
 export const experiences = [
   {
-    role: "Juriste Consultante - Droit des Affaires",
+    role: "",
     company: "Cabinet Conseil AWA",
     year: "2006 - 2008",
     type: "legal",
