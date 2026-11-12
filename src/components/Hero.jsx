@@ -4,11 +4,10 @@ import LazyImage from './LazyImage';
 import { useEffect, useState } from 'react';
 import { profile1Image } from '../assets/assets.js';
 import { motion, AnimatePresence } from 'framer-motion';
-import AnimatedSection from './AnimatedSection';
 import { useNavigate } from 'react-router-dom';
-import { FaBalanceScale, FaLightbulb, FaBookOpen } from 'react-icons/fa';
+import { FaBalanceScale, FaLightbulb, FaBookOpen, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
-// --- SECTION EXPERTISES (MAJ : Avocate / Coach / Auteur) ---
+// --- SECTION EXPERTISES ---
 const Expertises = () => (
   <section className="py-24 bg-white text-slate-900 px-6">
     <div className="max-w-7xl mx-auto">
@@ -42,7 +41,7 @@ const Expertises = () => (
   </section>
 );
 
-// --- SECTION QUOTE (MAJ : Vision Afrique/Femmes) ---
+// --- SECTION QUOTE ---
 const Quote = () => (
   <section className="py-24 bg-slate-950 text-white text-center italic font-light px-6">
     <div className="max-w-4xl mx-auto">
@@ -59,112 +58,169 @@ export default function Hero() {
   const [elementRef] = useIntersectionObserver();
   const navigate = useNavigate();
 
-  // Suggestion : Utilisez des images de cabinet de droit, de conférences ou de bibliothèques élégantes
-  const backgrounds = ['/background1.jpeg', '/background2.jpeg', '/background3.jpeg'];
-  const [bgIndex, setBgIndex] = useState(0);
+  // Données synchronisées : chaque slide a son image, son badge, son titre et sa description
+  const slides = [
+    {
+      image: '/background1.jpeg',
+      badge: 'AVOCATE • BARREAU DE KINSHASA/GOMBE',
+      title: 'Rebecca Kulufio',
+      description: 'Défendre vos intérêts juridiques avec rigueur et excellence au sein du Barreau de la Gombe.'
+    },
+    {
+      image: '/background2.jpeg',
+      badge: 'MENTOR • LEADERSHIP FÉMININ',
+      title: 'Accompagnement & Impact',
+      description: 'Éveiller le potentiel des femmes entrepreneures et guider la nouvelle génération de juristes.'
+    },
+    {
+      image: '/background3.jpeg',
+      badge: 'AUTEUR • CONFÉRENCIÈRE',
+      title: 'Plume & Transmission',
+      description: 'Des ouvrages engagés pour l’éveil de la jeunesse africaine et le partage d’expérience.'
+    }
+  ];
 
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  // Défilement automatique toutes les 6 secondes
   useEffect(() => {
     const timer = setInterval(() => {
-      setBgIndex((prev) => (prev + 1) % backgrounds.length);
+      setCurrentIndex((prev) => (prev + 1) % slides.length);
     }, 6000);
     return () => clearInterval(timer);
-  }, [backgrounds.length]);
+  }, [slides.length]);
+
+  const prevSlide = () => {
+    setCurrentIndex((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
+  };
+
+  const nextSlide = () => {
+    setCurrentIndex((prev) => (prev + 1) % slides.length);
+  };
 
   return (
     <>
       <section
         ref={elementRef}
         id="home"
-        className="relative min-h-screen flex flex-col justify-center items-center text-center py-24 px-6 overflow-hidden bg-slate-950"
+        className="relative min-h-screen flex flex-col justify-between items-center text-center py-12 md:py-16 px-6 overflow-hidden bg-slate-900"
       >
-        {/* Background Dynamique */}
+        {/* Background Dynamique Plus Clair */}
         <AnimatePresence mode="wait">
           <motion.div
-            key={bgIndex}
-            initial={{ opacity: 0, scale: 1.1 }}
+            key={currentIndex}
+            initial={{ opacity: 0, scale: 1.05 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 2 }}
+            transition={{ duration: 1.2 }}
             className="absolute inset-0 w-full h-full"
             style={{
-              backgroundImage: `url(${backgrounds[bgIndex]})`,
+              backgroundImage: `url(${slides[currentIndex].image})`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
-              filter: 'brightness(0.3) contrast(110%)',
+              // Luminosité augmentée à 0.65 pour un fond plus clair et visible
+              filter: 'brightness(0.65) contrast(105%)',
               transform: `translateY(${scrollY * 0.2}px)`,
             }}
           />
         </AnimatePresence>
 
-        {/* Overlay Signature */}
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-black/60 z-10" />
+        {/* Overlay léger pour garantir la lisibilité du texte blanc sans assombrir la photo */}
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-slate-950/40 z-10" />
 
-        <div className="relative z-20 max-w-5xl">
-          {/* Portrait Premium */}
-          <AnimatedSection variant="scaleIn" delay={0.2}>
-            <div className="mb-10 flex justify-center">
-              <div className="relative">
-                <LazyImage
-                  src={profile1Image}
-                  alt="Rebecca Kulufio"
-                  className="w-40 h-40 md:w-60 md:h-60 rounded-full object-cover transition-all duration-1000 border-2 border-amber-600/30 shadow-[0_0_50px_rgba(217,119,6,0.2)]"
-                  style={{ objectPosition: 'center 10%' }}
-                />
-                {/* Cercle Ornemental Doré */}
-                <motion.div 
-                  animate={{ rotate: -360 }}
-                  transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-                  className="absolute -inset-4 border-r-2 border-b-2 border-amber-600/20 rounded-full pointer-events-none"
-                />
-              </div>
+        {/* 1. BADGE FLOTTANT SUPÉRIEUR (Style maquette) */}
+        <div className="relative z-20 mt-6">
+          <div className="inline-flex items-center gap-3 bg-white/95 backdrop-blur-md px-4 py-2 rounded-full shadow-lg border border-amber-600/20">
+            <LazyImage
+              src={profile1Image}
+              alt="Rebecca Kulufio"
+              className="w-10 h-10 rounded-full object-cover border border-amber-600"
+              style={{ objectPosition: 'center 15%' }}
+            />
+            <div className="text-left pr-2">
+              <p className="text-slate-900 font-bold text-xs md:text-sm leading-tight">Rebecca Kulufio</p>
+              <p className="text-amber-600 font-bold text-[10px] uppercase tracking-wider">Barreau de Gombe</p>
             </div>
-          </AnimatedSection>
-
-          {/* Titre & Identité Multi-facettes */}
-          <AnimatedSection variant="slideUp" delay={0.4}>
-            <h2 className="text-sm md:text-lg tracking-[0.4em] uppercase mb-4 text-amber-500 font-medium">
-              Avocate • Coach • Auteur
-            </h2>
-            
-            <h1 className="text-5xl md:text-8xl font-serif font-bold mb-6 text-white leading-tight">
-              Rebecca <span className="italic font-light text-slate-200">Kulufio</span>
-            </h1>
-
-            <p className="text-lg md:text-xl text-slate-300 max-w-3xl mx-auto mb-10 font-light leading-relaxed">
-              Défendre vos intérêts juridiques et éveiller le potentiel de la 
-              <span className="text-white font-semibold italic"> jeunesse africaine </span> 
-              et des femmes entrepreneures.
-            </p>
-          </AnimatedSection>
-
-          {/* Actions Ciblées */}
-          <AnimatedSection variant="slideUp" delay={0.8}>
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <button
-                onClick={() => navigate('/services')}
-                className="px-10 py-4 bg-amber-600 text-white font-bold uppercase text-xs tracking-widest hover:bg-amber-700 transition-all shadow-xl shadow-amber-900/40"
-              >
-                Expertises & Services
-              </button>
-              
-              <button
-                onClick={() => navigate('/books')}
-                className="px-10 py-4 border border-white/30 text-white font-bold uppercase text-xs tracking-widest hover:bg-white hover:text-black transition-all backdrop-blur-sm"
-              >
-                Découvrir mes Livres
-              </button>
-            </div>
-          </AnimatedSection>
+          </div>
         </div>
 
-        {/* Scroll Indicator Amélioré */}
-        <div className="absolute bottom-10 z-20 flex flex-col items-center gap-2">
-          <span className="text-[9px] uppercase tracking-[0.3em] text-slate-500">Explorer</span>
-          <motion.div 
-            animate={{ y: [0, 10, 0] }}
-            transition={{ repeat: Infinity, duration: 2 }}
-            className="w-px h-10 bg-gradient-to-b from-amber-600 to-transparent"
-          />
+        {/* 2. FLÈCHES DE NAVIGATION LATÉRALES (< et >) */}
+        <button
+          onClick={prevSlide}
+          aria-label="Slide précédente"
+          className="absolute left-3 md:left-8 top-1/2 -translate-y-1/2 z-30 p-3 text-white/70 hover:text-amber-500 transition-colors focus:outline-none"
+        >
+          <FaChevronLeft size={28} />
+        </button>
+
+        <button
+          onClick={nextSlide}
+          aria-label="Slide suivante"
+          className="absolute right-3 md:right-8 top-1/2 -translate-y-1/2 z-30 p-3 text-white/70 hover:text-amber-500 transition-colors focus:outline-none"
+        >
+          <FaChevronRight size={28} />
+        </button>
+
+        {/* 3. CONTENU TEXTUEL DÉFILANT + BOUTONS CONSERVÉS */}
+        <div className="relative z-20 max-w-4xl w-full my-auto pt-16 pb-6">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentIndex}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.6 }}
+              className="flex flex-col items-center"
+            >
+              {/* Pilule de catégorie dynamique */}
+              <span className="inline-block px-4 py-1.5 mb-5 bg-amber-600 text-white text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] rounded shadow-md">
+                {slides[currentIndex].badge}
+              </span>
+
+              {/* Titre dynamique */}
+              <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif font-bold mb-4 text-white leading-tight drop-shadow-md">
+                {slides[currentIndex].title}
+              </h1>
+
+              {/* Description dynamique */}
+              <p className="text-base md:text-xl text-slate-100 max-w-2xl mx-auto mb-10 font-light leading-relaxed drop-shadow">
+                {slides[currentIndex].description}
+              </p>
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Actions Ciblées (Structure et couleurs conservées) */}
+          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center max-w-lg sm:max-w-none mx-auto">
+            <button
+              onClick={() => navigate('/services')}
+              className="w-full sm:w-auto px-10 py-4 bg-amber-600 text-white font-bold uppercase text-xs tracking-widest hover:bg-amber-700 transition-all shadow-xl shadow-amber-900/40 rounded-sm"
+            >
+              Expertises & Services
+            </button>
+            
+            <button
+              onClick={() => navigate('/books')}
+              className="w-full sm:w-auto px-10 py-4 bg-white text-slate-950 font-bold uppercase text-xs tracking-widest hover:bg-slate-200 transition-all shadow-xl rounded-sm"
+            >
+              Découvrir mes Livres
+            </button>
+          </div>
+        </div>
+
+        {/* 4. INDICATEURS DE PAGINATION (Points de défilement) */}
+        <div className="relative z-20 flex items-center gap-2.5 mb-2">
+          {slides.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => setCurrentIndex(idx)}
+              aria-label={`Aller à la diapositive ${idx + 1}`}
+              className={`h-2 rounded-full transition-all duration-300 ${
+                currentIndex === idx 
+                  ? 'w-8 bg-amber-600' 
+                  : 'w-2 bg-white/50 hover:bg-white/80'
+              }`}
+            />
+          ))}
         </div>
       </section>
 

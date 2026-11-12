@@ -68,8 +68,8 @@ export default function Contact() {
               <h4 className="text-[10px] uppercase tracking-widest font-bold text-amber-600 mb-6">Le Cabinet</h4>
               <div className="space-y-6 text-slate-500 dark:text-slate-400 font-light text-sm">
                 <p className="flex items-start gap-3"><FaMapMarkerAlt className="mt-1 text-amber-600"/> Gombe, Kinshasa, République Démocratique du Congo</p>
-                <p className="flex items-center gap-3"><FaPhoneAlt className="text-amber-600"/> +243 [Votre Numéro]</p>
-                <p className="flex items-center gap-3"><FaEnvelope className="text-amber-600"/> contact@votre-domaine.com</p>
+                <p className="flex items-center gap-3"><FaPhoneAlt className="text-amber-600"/> +243 [894 400 411]</p>
+                <p className="flex items-center gap-3"><FaEnvelope className="text-amber-600"/> rebeccakulufio@gmail.com</p>
                 <p className="flex items-center gap-3"><FaClock className="text-amber-600"/> Lun - Ven: 09h00 - 17h00</p>
               </div>
             </div>
